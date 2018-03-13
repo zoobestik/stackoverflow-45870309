@@ -1,6 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const ExtractTextPlugin = require('mini-css-extract-plugin');
 const CssoWebpackPlugin = require('csso-webpack-plugin').default;
 
 module.exports = {
@@ -16,15 +16,18 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                use: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: 'css-loader'
-                })
+                use: [
+                    ExtractTextPlugin.loader,
+                    'css-loader'
+                ]
             }
         ]
     },
     plugins:[
-        new ExtractTextPlugin('styles.css'),
+        new ExtractTextPlugin({
+          filename: "[name].css",
+          chunkFilename: "[id].css"
+        }),
         new CssoWebpackPlugin()
     ],
     output: {
