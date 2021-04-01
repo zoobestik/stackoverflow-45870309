@@ -1,9 +1,9 @@
 const path = require('path');
-const webpack = require('webpack');
 const ExtractTextPlugin = require('mini-css-extract-plugin');
 const CssoWebpackPlugin = require('csso-webpack-plugin').default;
 
 module.exports = {
+    mode: 'production',
     entry: {
         app: './src/index.js'
     },
